@@ -15,6 +15,16 @@ def sample_run_anonymizer(text, start, end):
 
 
 if __name__ == "__main__":
+    # input should be:
+    # text: My name is Bond.
+    # start: 11
+    # end: 15
+    # output should be:
+    # text: My name is BIP.
+    # items:
+    # [
+    #     {'start': 11, 'end': 14, 'entity_type': 'PERSON', 'text': 'BIP', 'operator': 'replace'}
+    # ]
     text = "My name is Bond."
     start = 11
     end = 15
@@ -24,7 +34,6 @@ if __name__ == "__main__":
     print("[")
     for item in result.items:
         print(
-            f"    {{'start': {item.start}, 'end': {item.end}, 'entity_type': '{item.entity_type}', "
-            f"'text': '{item.text}', 'operator': '{item.operator}'}}"
+            f"    {{'start': {item.start}, 'end': {item.end}, 'entity_type': '{item.entity_type}', 'text': '{item.text}', 'operator': '{item.operator}'}}"
         )
     print("]")
