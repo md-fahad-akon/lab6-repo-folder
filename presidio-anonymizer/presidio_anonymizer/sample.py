@@ -23,23 +23,10 @@ def sample_run_anonymizer(text_to_anonymize: str, start_index: int, end_index: i
 
     return result
 
-    # input should be:
-    # text: My name is Bond.
-    # start: 11
-    # end: 15
-    # 
-    # output should be:
-    # text: My name is BIP.
-    # items:
-    # [
-    #     {'start': 11, 'end': 14, 'entity_type': 'PERSON', 'text': 'BIP', 'operator': 'replace'}
-    # ]
-
 if __name__ == "__main__": 
     text = "My name is Bond."
     start = 11
     end = 15
 
     anonymized_result = sample_run_anonymizer(text, start, end)
-    
     print(anonymized_result)
