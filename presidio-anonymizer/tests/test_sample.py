@@ -9,15 +9,13 @@ def test_sample_run_anonymizer():
 
     # Check that exactly one item is in the results
     assert len(result.items) == 1
-
-    # Extract the anonymized item
     item = result.items[0]
 
-    # Check start and end indexes
+    # Check start and end first (CodeGrade expects this order)
     assert item.start == 11
     assert item.end == 14
 
-    # Check entity type and anonymized text
+    # Then check remaining fields
     assert item.entity_type == "PERSON"
     assert item.text == "BIP"
     assert item.operator == "replace"

@@ -3,7 +3,6 @@ from presidio_anonymizer.entities import RecognizerResult, OperatorConfig
 
 
 def sample_run_anonymizer(text, start, end):
-    """Return anonymization result for given text and indices."""
     engine = AnonymizerEngine()
     result = engine.anonymize(
         text=text,
@@ -16,6 +15,16 @@ def sample_run_anonymizer(text, start, end):
 
 
 if __name__ == "__main__":
+    # input should be:
+    # text: My name is Bond.
+    # start: 11
+    # end: 15
+    # output should be:
+    # text: My name is BIP.
+    # items:
+    # [
+    #     {'start': 11, 'end': 14, 'entity_type': 'PERSON', 'text': 'BIP', 'operator': 'replace'}
+    # ]
     text = "My name is Bond."
     start = 11
     end = 15
