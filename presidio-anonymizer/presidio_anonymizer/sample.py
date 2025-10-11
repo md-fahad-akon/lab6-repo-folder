@@ -1,6 +1,7 @@
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import RecognizerResult, OperatorConfig
 
+
 def sample_run_anonymizer(text, start, end):
     """Return anonymization result for given text and indices."""
     engine = AnonymizerEngine()
@@ -14,20 +15,17 @@ def sample_run_anonymizer(text, start, end):
     return result
 
 
-def main():
+if __name__ == "__main__":
     text = "My name is Bond."
     start = 11
     end = 15
-    res = sample_run_anonymizer(text, start, end)
-    print(f"text: {res.text}")
+    result = sample_run_anonymizer(text, start, end)
+    print(f"text: {result.text}")
     print("items:")
     print("[")
-    for item in res.items:
+    for item in result.items:
         print(
-            f"    {{'start': {item.start}, 'end': {item.end}, 'entity_type': '{item.entity_type}', 'text': '{item.text}', 'operator': '{item.operator}'}}"
+            f"    {{'start': {item.start}, 'end': {item.end}, 'entity_type': '{item.entity_type}', "
+            f"'text': '{item.text}', 'operator': '{item.operator}'}}"
         )
     print("]")
-
-
-if __name__ == "__main__":
-    main()

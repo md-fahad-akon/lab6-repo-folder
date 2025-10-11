@@ -1,5 +1,6 @@
 from presidio_anonymizer.sample import sample_run_anonymizer
 
+
 def test_sample_run_anonymizer():
     result = sample_run_anonymizer("My name is Bond.", 11, 15)
 
@@ -8,11 +9,15 @@ def test_sample_run_anonymizer():
 
     # Check that exactly one item is in the results
     assert len(result.items) == 1
+
+    # Extract the anonymized item
     item = result.items[0]
 
-    # Check fields of the anonymized item
+    # Check start and end indexes
     assert item.start == 11
     assert item.end == 14
+
+    # Check entity type and anonymized text
     assert item.entity_type == "PERSON"
     assert item.text == "BIP"
     assert item.operator == "replace"
