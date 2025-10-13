@@ -24,7 +24,7 @@ def sample_run_anonymizer(text, start, end):
     return result
 
 if __name__ == "__main__":
-    result = sample_run_anonymizer()
+    result = sample_run_anonymizer("My name is Bond.", 11, 15)
     print(result)
     
     # input should be:
