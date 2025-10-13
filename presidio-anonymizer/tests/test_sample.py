@@ -1,28 +1,27 @@
-import unittest
 from presidio_anonymizer.sample import sample_run_anonymizer
 
 
-class TestSampleRunAnonymizer(unittest.TestCase):
-    """Unit tests for the sample_run_anonymizer function."""
+def test_sample_run_anonymizer():
+    """Test that the function anonymizes 'My name is Bond.' correctly."""
+    # Call the function with the example input
+    result = sample_run_anonymizer("My name is Bond.", 11, 15)
     
-    def test_default_parameters_anonymizes_correctly(self):
-        """Test that the function anonymizes 'My name is Bond.' correctly with default parameters."""
-        result = sample_run_anonymizer()
-        
-        # Verify the anonymized text
-        self.assertEqual(result.text, "My name is BIP.")
-        
-        # Verify the result has items
-        self.assertIsNotNone(result.items)
-        self.assertEqual(len(result.items), 1)
-        
-        # Verify the item details
-        item = result.items[0]
-        self.assertEqual(item.start, 11)
-        self.assertEqual(item.end, 14)
-        self.assertEqual(item.entity_type, 'PERSON')
-        self.assertEqual(item.text, 'BIP')
-        self.assertEqual(item.operator, 'replace')
-
-if __name__ == '__main__':
-    unittest.main()
+    # Verify the anonymized text
+    assert result.text == "My name is BIP."
+    
+    # Verify the result has items
+    assert len(result.items) == 1
+    
+    # Get the first item
+    item = result.items[0]
+    
+    # Verify the start position
+    assert item.start == 11
+    
+    # Verify the end position
+    assert item.end == 14
+    
+    # Verify other item details
+    assert item.entity_type == 'PERSON'
+    assert item.text == 'BIP'
+    assert item.operator == 'replace'
