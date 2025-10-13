@@ -1,22 +1,28 @@
-import pytest
+import unittest
 from presidio_anonymizer.sample import sample_run_anonymizer
-from presidio_anonymizer.entities.engine.result.operator_result import OperatorResult
 
 
-def test_sample_run_anonymizer():
-    text_input = "My name is Bond."
-    start_index = 11
-    end_index = 15
-    expected_text = "My name is BIP."
-    expected_item_dict = {
-        "start": 11,
-        "end": 14,
-        "entity_type": "PERSON",
-        "text": "BIP",
-        "operator": "replace",
-    }
-    actual_result = sample_run_anonymizer(text_input, start_index, end_index)
+class TestSampleRunAnonymizer(unittest.TestCase):
+    """Unit tests for the sample_run_anonymizer function."""
+    
+    def test_default_parameters_anonymizes_correctly(self):
+        """Test that the function anonymizes 'My name is Bond.' correctly with default parameters."""
+        result = sample_run_anonymizer()
+        
+        # Verify the anonymized text
+        self.assertEqual(result.text, "My name is BIP.")
+        
+        # Verify the result has items
+        self.assertIsNotNone(result.items)
+        self.assertEqual(len(result.items), 1)
+        
+        # Verify the item details
+        item = result.items[0]
+        self.assertEqual(item.start, 11)
+        self.assertEqual(item.end, 14)
+        self.assertEqual(item.entity_type, 'PERSON')
+        self.assertEqual(item.text, 'BIP')
+        self.assertEqual(item.operator, 'replace')
 
-    assert actual_result.text == expected_text
-    assert len(actual_result.items) == 1
-    assert actual_result.items[0] == OperatorResult(**expected_item_dict)
+if __name__ == '__main__':
+    unittest.main()
