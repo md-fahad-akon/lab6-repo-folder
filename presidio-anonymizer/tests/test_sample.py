@@ -6,8 +6,12 @@ class TestSampleRunAnonymizer(unittest.TestCase):
     """Unit tests for the sample_run_anonymizer function."""
     
     def test_default_parameters_anonymizes_correctly(self):
-        """Test that the function anonymizes 'My name is Bond.' correctly with default parameters."""
+        """Test that the function anonymizes 'My name is Bond.' """
+        # Call the function
         result = sample_run_anonymizer()
+        
+        # Verify we got a result back
+        self.assertIsNotNone(result)
         
         # Verify the anonymized text
         self.assertEqual(result.text, "My name is BIP.")
@@ -16,10 +20,16 @@ class TestSampleRunAnonymizer(unittest.TestCase):
         self.assertIsNotNone(result.items)
         self.assertEqual(len(result.items), 1)
         
-        # Verify the item details
+        # Get the first item
         item = result.items[0]
+        
+        # Verify the start position
         self.assertEqual(item.start, 11)
+        
+        # Verify the end position
         self.assertEqual(item.end, 14)
+        
+        # Verify other item details
         self.assertEqual(item.entity_type, 'PERSON')
         self.assertEqual(item.text, 'BIP')
         self.assertEqual(item.operator, 'replace')
